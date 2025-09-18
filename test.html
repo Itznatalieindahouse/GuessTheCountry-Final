@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geography Game Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>Geography Game Test</h1>
+    <div id="testResults"></div>
+
+    <script>
+        function addTestResult(message, type = 'info') {
+            const results = document.getElementById('testResults');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+
+        // Test 1: Check if required files exist
+        addTestResult('Testing file availability...', 'info');
+        
+        fetch('script.js')
+            .then(response => {
+                if (response.ok) {
+                    addTestResult('✅ script.js found', 'success');
+                } else {
+                    addTestResult('❌ script.js not found', 'error');
+                }
+            })
+            .catch(error => {
+                addTestResult(`❌ Error loading script.js: ${error.message}`, 'error');
+            });
+
+        fetch('styles.css')
+            .then(response => {
+                if (response.ok) {
+                    addTestResult('✅ styles.css found', 'success');
+                } else {
+                    addTestResult('❌ styles.css not found', 'error');
+                }
+            })
+            .catch(error => {
+                addTestResult(`❌ Error loading styles.css: ${error.message}`, 'error');
+            });
+
+        fetch('world.svg')
+            .then(response => {
+                if (response.ok) {
+                    addTestResult('✅ world.svg found', 'success');
+                } else {
+                    addTestResult('❌ world.svg not found', 'error');
+                }
+            })
+            .catch(error => {
+                addTestResult(`❌ Error loading world.svg: ${error.message}`, 'error');
+            });
+
+        // Test 2: Check if main game page loads
+        fetch('index.html')
+            .then(response => {
+                if (response.ok) {
+                    addTestResult('✅ index.html found', 'success');
+                } else {
+                    addTestResult('❌ index.html not found', 'error');
+                }
+            })
+            .catch(error => {
+                addTestResult(`❌ Error loading index.html: ${error.message}`, 'error');
+            });
+
+        addTestResult('Test completed. Check the results above.', 'info');
+    </script>
+</body>
+</html> 

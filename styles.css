@@ -1,0 +1,673 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    height: 100vh;
+    overflow: hidden;
+    color: #333;
+}
+
+html { height: 100%; overflow: hidden; }
+
+/* Updated Home layout with maps */
+.home-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-top-map {
+    height: 25vh;
+    background-image: url('world.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    filter: saturate(0.3) contrast(1.1);
+}
+
+.home-bottom-map {
+    height: 25vh;
+    background-image: url('world.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    filter: saturate(0.3) contrast(1.1);
+}
+
+.hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2e7d32;
+    overflow: hidden;
+    flex: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('world.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    filter: saturate(0.2) contrast(1.1);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(46,125,50,0.75), rgba(27,94,32,0.65));
+}
+
+.hero-content {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.hero-title {
+    font-size: 3rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    margin-bottom: 24px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.btn-large {
+    padding: 14px 28px;
+    font-size: 1.05rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #c8e6c9;
+    color: #e8f5e9;
+}
+
+.btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Modal views */
+.modal-view {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+}
+
+.modal-card {
+    background: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 520px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 16px 0 8px;
+}
+
+.btn-mode {
+    padding: 12px 18px;
+}
+
+.btn-link {
+    background: transparent;
+    color: #007bff;
+    box-shadow: none;
+    margin-top: 8px;
+}
+
+.btn-link:hover {
+    background: rgba(0,123,255,0.08);
+}
+
+/* Success Modal */
+.success-modal {
+    max-width: 600px;
+    text-align: center;
+}
+
+.success-modal h2 {
+    color: #10B981;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.success-stats {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.success-stats p {
+    margin: 8px 0;
+    font-size: 1.1rem;
+}
+
+.success-flag {
+    margin: 20px 0;
+}
+
+.success-fact {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e8f5e9;
+    border-radius: 8px;
+    border-left: 4px solid #10B981;
+}
+
+.success-fact p {
+    margin: 8px 0;
+    font-style: italic;
+    color: #2e7d32;
+}
+
+/* Statistics */
+.stats-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.stats-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#statsMap {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+
+.stats-layout {
+    display: flex;
+    gap: 16px;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.stats-layout .map-container {
+    flex: 1 1 auto;
+}
+
+.stats-panel {
+    width: 360px;
+    flex: 0 0 360px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.stats-panel .panel-inner {
+    padding: 16px;
+}
+
+.stats-panel h3 {
+    margin-bottom: 10px;
+}
+
+.panel-content img.flag {
+    width: 48px;
+    height: 32px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.panel-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed #e5e7eb;
+}
+
+.panel-row:last-child {
+    border-bottom: none;
+}
+
+.stats-tooltip {
+    position: absolute;
+    z-index: 3000;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    pointer-events: none;
+    min-width: 220px;
+}
+
+.stats-tooltip .row {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.stat-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.stat-card h3 {
+    margin-bottom: 15px;
+    color: #374151;
+    border-bottom: 2px solid #10B981;
+    padding-bottom: 8px;
+}
+
+.stat-card p {
+    margin: 8px 0;
+    color: #6B7280;
+}
+
+/* Your Statistics background */
+.your-stats-bg {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+}
+
+.your-stats-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('world.svg'), linear-gradient(135deg, #0f172a, #1e3a8a);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    opacity: 0.25;
+    filter: saturate(1.1) contrast(1.1);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.your-stats-bg > * {
+    position: relative;
+    z-index: 1;
+}
+
+.game-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    border-radius: 10px;
+    color: white;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.score, .guesses {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(5px);
+}
+
+.prompt-container {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+}
+
+#prompt {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.map-container {
+    position: relative;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 5px;
+    border: 2px solid #e9ecef;
+    overflow: hidden;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 85vh; /* Significantly increased height to take up more screen space */
+}
+
+/* header buttons inherit .btn-outline styles */
+
+.map-wrapper {
+    width: 100%;
+    height: 100%;
+    flex: 1 1 auto;
+    min-height: 650px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #87CEEB; /* Default water color for normal mode */
+    cursor: grab;
+    position: relative;
+    user-select: none;
+}
+
+#leafletMap {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background: #87CEEB; /* fallback water color when tiles loading */
+}
+
+.leaflet-container {
+    background: #87CEEB; /* ensure visible background even if tiles fail */
+}
+
+.leaflet-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0; /* Below our SVG by default */
+    display: block;
+}
+
+.map-wrapper .leaflet-map { display: block; }
+
+/* Satellite mode wrapper background to hint the mode */
+.map-wrapper.satellite {
+    background: #2a2a2a; /* Dark to mimic satellite border color */
+}
+
+.map-wrapper:active {
+    cursor: grabbing;
+}
+
+#worldMap {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform-origin: 0 0;
+    will-change: transform;
+    image-rendering: optimizeQuality;
+    shape-rendering: geometricPrecision;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    z-index: 1; /* Above leaflet by default */
+}
+
+#worldMap .country {
+    fill: #F8F9FA; /* Clean light gray fill for countries */
+    stroke: none; /* No stroke for countries */
+    stroke-width: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    shape-rendering: geometricPrecision;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+#worldMap .country:hover {
+    fill: #00BFFF; /* Bright blue on hover for SVG map */
+    filter: drop-shadow(0 4px 8px rgba(0, 123, 255, 0.3));
+    transform: scale(1.02);
+}
+
+/* Special hover color for satellite view */
+.map-wrapper.satellite #worldMap .country:hover {
+    fill: #FFFFFF; /* Bright white on hover for satellite view */
+    filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.4));
+    transform: scale(1.02);
+}
+
+/* Satellite mode country styling (muted earth tones) */
+#worldMap.satellite .country { /* no-op now that we use Leaflet for real maps */ }
+
+#worldMap .country.correct {
+    fill: #10B981 !important; /* Polished green fill for correct */
+    stroke: none;
+    stroke-width: 0;
+    filter: drop-shadow(0 4px 12px rgba(16, 185, 129, 0.4));
+    animation: correctPulse 0.6s ease-out;
+}
+
+#worldMap .country.incorrect {
+    fill: #EF4444 !important; /* Polished red fill for incorrect */
+    stroke: none;
+    stroke-width: 0;
+    filter: drop-shadow(0 4px 12px rgba(239, 68, 68, 0.4));
+    animation: incorrectShake 0.6s ease-out;
+}
+
+/* Animations for country highlights */
+@keyframes correctPulse {
+    0% { 
+        transform: scale(1); 
+        filter: drop-shadow(0 4px 12px rgba(16, 185, 129, 0.4));
+    }
+    50% { 
+        transform: scale(1.05); 
+        filter: drop-shadow(0 6px 16px rgba(16, 185, 129, 0.6));
+    }
+    100% { 
+        transform: scale(1); 
+        filter: drop-shadow(0 4px 12px rgba(16, 185, 129, 0.4));
+    }
+}
+
+@keyframes incorrectShake {
+    0%, 100% { 
+        transform: translateX(0); 
+        filter: drop-shadow(0 4px 12px rgba(239, 68, 68, 0.4));
+    }
+    25% { 
+        transform: translateX(-3px); 
+        filter: drop-shadow(0 4px 12px rgba(239, 68, 68, 0.4));
+    }
+    75% { 
+        transform: translateX(3px); 
+        filter: drop-shadow(0 4px 12px rgba(239, 68, 68, 0.4));
+    }
+}
+
+/* Enhanced hover effects for better visual feedback */
+#worldMap .country {
+    will-change: transform, filter;
+}
+
+/* Smooth transitions for all interactive states */
+#worldMap .country,
+#worldMap .country:hover,
+#worldMap .country.correct,
+#worldMap .country.incorrect {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feedback {
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback.correct {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.feedback.incorrect {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+.feedback.game-over {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #856404;
+    border: 2px solid #ffeaa7;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .game-container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .map-wrapper {
+        height: 400px;
+    }
+    
+    .map-controls {
+        top: 20px;
+        right: 20px;
+    }
+    
+    .map-controls button {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+    
+    #prompt {
+        font-size: 1.2em;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+        margin: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5em;
+    }
+    
+    .map-wrapper {
+        height: 300px;
+    }
+    
+    .game-info {
+        font-size: 1em;
+    }
+    
+    .score, .guesses {
+        padding: 8px 15px;
+    }
+}

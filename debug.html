@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geography Game Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+        .debug-panel { background: white; padding: 20px; margin: 20px 0; border-radius: 10px; }
+        .game-container { background: white; padding: 20px; border-radius: 10px; }
+        .map-wrapper { width: 100%; height: 400px; border: 2px solid #ccc; background: #87CEEB; }
+        #worldMap { width: 100%; height: 100%; }
+        .country { fill: #F5F5DC; stroke: #8B7355; stroke-width: 1; cursor: pointer; }
+        .country:hover { fill: #FFD700; stroke: #FF8C00; stroke-width: 2; }
+        .country.correct { fill: #4CAF50; stroke: #2E7D32; stroke-width: 2; }
+        .country.incorrect { fill: #f44336; stroke: #D32F2F; stroke-width: 2; }
+        button { margin: 5px; padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .debug-info { background: #e8f4fd; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Geography Game Debug Version</h1>
+    
+    <div class="debug-panel">
+        <h3>Debug Information:</h3>
+        <div id="debugInfo">Loading...</div>
+        <button onclick="addDebugInfo('Manual debug info added')">Add Debug Info</button>
+        <button onclick="clearDebugInfo()">Clear Debug</button>
+    </div>
+    
+    <div class="game-container">
+        <h2>Game Status</h2>
+        <div>Countries: <span id="countriesGuessed">0</span> / <span id="totalCountries">0</span></div>
+        <div>Guesses Left: <span id="guesses">3</span></div>
+        <div id="prompt">Click "Start Game" to begin!</div>
+        <button id="startBtn">Start Game</button>
+        <button id="nextBtn" style="display: none;">Next Country</button>
+        <button id="resetView">Reset View</button>
+        <div id="feedback"></div>
+    </div>
+    
+    <div class="map-wrapper" id="mapWrapper">
+        <svg id="worldMap" viewBox="0 0 1009.6727 665.96301">
+            <!-- SVG content will be loaded here -->
+        </svg>
+    </div>
+
+    <script>
+        // Debug functions
+        function addDebugInfo(message) {
+            const debugInfo = document.getElementById('debugInfo');
+            const timestamp = new Date().toLocaleTimeString();
+            debugInfo.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            console.log(`[${timestamp}] ${message}`);
+        }
+        
+        function clearDebugInfo() {
+            document.getElementById('debugInfo').innerHTML = 'Debug cleared';
+        }
+        
+        // Game state
+        let currentCountry = null;
+        let countriesGuessed = 0;
+        let totalCountries = 0;
+        let guessesLeft = 3;
+        let gameActive = false;
+        let availableCountries = [];
+        let guessedCountries = new Set();
+        
+        // DOM elements
+        const startBtn = document.getElementById('startBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const prompt = document.getElementById('prompt');
+        const countriesGuessedElement = document.getElementById('countriesGuessed');
+        const totalCountriesElement = document.getElementById('totalCountries');
+        const guessesElement = document.getElementById('guesses');
+        const feedback = document.getElementById('feedback');
+        const mapWrapper = document.getElementById('mapWrapper');
+        const worldMap = document.getElementById('worldMap');
+        const resetViewBtn = document.getElementById('resetView');
+        
+        // Country name mapping (simplified for testing)
+        const countryNames = {
+            'US': 'United States', 'CA': 'Canada', 'MX': 'Mexico', 'BR': 'Brazil', 'AR': 'Argentina',
+            'GB': 'United Kingdom', 'FR': 'France', 'DE': 'Germany', 'IT': 'Italy', 'ES': 'Spain',
+            'RU': 'Russia', 'CN': 'China', 'IN': 'India', 'JP': 'Japan', 'AU': 'Australia'
+        };
+        
+        // Load SVG content
+        async function loadSVG() {
+            try {
+                addDebugInfo('Loading SVG...');
+                const response = await fetch('world.svg');
+                const svgText = await response.text();
+                
+                const parser = new DOMParser();
+                const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+                const paths = svgDoc.querySelectorAll('path');
+                
+                addDebugInfo(`Found ${paths.length} countries in SVG`);
+                
+                // Add paths to our SVG
+                paths.forEach(path => {
+                    const newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    newPath.setAttribute('d', path.getAttribute('d'));
+                    newPath.setAttribute('title', path.getAttribute('title'));
+                    newPath.setAttribute('id', path.getAttribute('id'));
+                    newPath.classList.add('country');
+                    newPath.style.fill = '#F5F5DC';
+                    newPath.style.stroke = '#8B7355';
+                    newPath.style.strokeWidth = '1';
+                    worldMap.appendChild(newPath);
+                });
+                
+                // Initialize countries array
+                availableCountries = Object.keys(countryNames);
+                totalCountries = availableCountries.length;
+                totalCountriesElement.textContent = totalCountries;
+                
+                addDebugInfo(`Initialized ${totalCountries} countries`);
+                
+                // Add event listeners
+                addCountryEventListeners();
+                resetAllCountryColors();
+                
+            } catch (error) {
+                addDebugInfo(`Error loading SVG: ${error.message}`);
+                createFallbackMap();
+            }
+        }
+        
+        function createFallbackMap() {
+            addDebugInfo('Creating fallback map...');
+            const fallbackCountries = [
+                { id: 'US', title: 'United States', d: 'M 100,200 L 300,200 L 300,300 L 100,300 Z' },
+                { id: 'CA', title: 'Canada', d: 'M 100,100 L 300,100 L 300,200 L 100,200 Z' },
+                { id: 'MX', title: 'Mexico', d: 'M 100,300 L 300,300 L 300,400 L 100,400 Z' }
+            ];
+            
+            fallbackCountries.forEach(country => {
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', country.d);
+                path.setAttribute('title', country.title);
+                path.setAttribute('id', country.id);
+                path.classList.add('country');
+                path.style.fill = '#F5F5DC';
+                path.style.stroke = '#8B7355';
+                path.style.strokeWidth = '1';
+                worldMap.appendChild(path);
+            });
+            
+            availableCountries = fallbackCountries.map(c => c.id);
+            totalCountries = availableCountries.length;
+            totalCountriesElement.textContent = totalCountries;
+            addCountryEventListeners();
+            resetAllCountryColors();
+            addDebugInfo('Fallback map created');
+        }
+        
+        function addCountryEventListeners() {
+            const countryPaths = document.querySelectorAll('.country');
+            countryPaths.forEach(path => {
+                path.addEventListener('click', handleCountryClick);
+                path.addEventListener('mouseenter', handleCountryHover);
+                path.addEventListener('mouseleave', handleCountryLeave);
+            });
+            addDebugInfo(`Added event listeners to ${countryPaths.length} countries`);
+        }
+        
+        function handleCountryClick(event) {
+            if (!gameActive) {
+                addDebugInfo('Game not active, ignoring click');
+                return;
+            }
+            
+            const countryId = event.target.id;
+            const countryName = countryNames[countryId];
+            
+            if (!countryName) {
+                addDebugInfo(`No country name found for ID: ${countryId}`);
+                return;
+            }
+            
+            addDebugInfo(`Clicked country: ${countryName} (ID: ${countryId})`);
+            
+            // Check if this country has already been guessed
+            if (guessedCountries.has(countryId)) {
+                addDebugInfo(`Country ${countryName} already guessed`);
+                feedback.textContent = `You've already guessed ${countryName}! Try a different country.`;
+                feedback.className = 'feedback incorrect';
+                return;
+            }
+            
+            if (countryName === currentCountry) {
+                // Correct guess
+                countriesGuessed++;
+                countriesGuessedElement.textContent = countriesGuessed;
+                guessedCountries.add(countryId);
+                
+                addDebugInfo(`Correct guess! ${countryName}. Total correct: ${countriesGuessed}`);
+                
+                feedback.textContent = `Correct! ${countryName} is the right answer!`;
+                feedback.className = 'feedback correct';
+                
+                // Fill the correct country with green
+                event.target.classList.add('correct');
+                event.target.style.fill = '#4CAF50';
+                event.target.style.stroke = '#2E7D32';
+                event.target.style.strokeWidth = '2';
+                
+                endRound();
+            } else {
+                // Wrong guess
+                guessesLeft--;
+                guessesElement.textContent = guessesLeft;
+                guessedCountries.add(countryId);
+                
+                addDebugInfo(`Wrong guess! ${countryName}. Guesses left: ${guessesLeft}`);
+                
+                feedback.textContent = `Wrong! That's ${countryName}. Try again!`;
+                feedback.className = 'feedback incorrect';
+                
+                // Fill the wrong country with red temporarily
+                event.target.classList.add('incorrect');
+                event.target.style.fill = '#f44336';
+                event.target.style.stroke = '#D32F2F';
+                event.target.style.strokeWidth = '2';
+                setTimeout(() => {
+                    event.target.classList.remove('incorrect');
+                    event.target.style.fill = '#F5F5DC';
+                    event.target.style.stroke = '#8B7355';
+                    event.target.style.strokeWidth = '1';
+                }, 1000);
+                
+                if (guessesLeft <= 0) {
+                    addDebugInfo(`Game over! Correct answer was ${currentCountry}`);
+                    feedback.textContent = `Game Over! The correct answer was ${currentCountry}.`;
+                    feedback.className = 'feedback game-over';
+                    
+                    // Fill the correct country with green
+                    const correctPath = document.getElementById(Object.keys(countryNames).find(key => countryNames[key] === currentCountry));
+                    if (correctPath) {
+                        correctPath.classList.add('correct');
+                        correctPath.style.fill = '#4CAF50';
+                        correctPath.style.stroke = '#2E7D32';
+                        correctPath.style.strokeWidth = '2';
+                    }
+                    
+                    endRound();
+                }
+            }
+        }
+        
+        function handleCountryHover(event) {
+            if (!gameActive) return;
+            
+            if (!event.target.classList.contains('correct') && !event.target.classList.contains('incorrect')) {
+                event.target.style.fill = '#FFD700';
+                event.target.style.stroke = '#FF8C00';
+                event.target.style.strokeWidth = '2';
+            }
+        }
+        
+        function handleCountryLeave(event) {
+            if (!gameActive) return;
+            
+            if (!event.target.classList.contains('correct') && !event.target.classList.contains('incorrect')) {
+                event.target.style.fill = '#F5F5DC';
+                event.target.style.stroke = '#8B7355';
+                event.target.style.strokeWidth = '1';
+            }
+        }
+        
+        function startGame() {
+            addDebugInfo('Starting new game...');
+            gameActive = true;
+            countriesGuessed = 0;
+            totalCountries = availableCountries.length;
+            guessesLeft = 3;
+            guessedCountries.clear();
+            
+            countriesGuessedElement.textContent = countriesGuessed;
+            totalCountriesElement.textContent = totalCountries;
+            guessesElement.textContent = guessesLeft;
+            
+            startBtn.style.display = 'none';
+            nextBtn.style.display = 'inline-block';
+            
+            resetAllCountryColors();
+            nextCountry();
+        }
+        
+        function nextCountry() {
+            const unguessedCountries = availableCountries.filter(countryId => !guessedCountries.has(countryId));
+            
+            addDebugInfo(`Unguessed countries: ${unguessedCountries.length}`);
+            
+            if (unguessedCountries.length === 0) {
+                addDebugInfo('Game completed!');
+                prompt.textContent = `Congratulations! You've completed all ${totalCountries} countries!`;
+                feedback.textContent = `Final Score: ${countriesGuessed} out of ${totalCountries} countries guessed correctly!`;
+                feedback.className = 'feedback correct';
+                gameActive = false;
+                nextBtn.textContent = 'Play Again';
+                return;
+            }
+            
+            const randomIndex = Math.floor(Math.random() * unguessedCountries.length);
+            const countryId = unguessedCountries[randomIndex];
+            currentCountry = countryNames[countryId];
+            
+            addDebugInfo(`New country to find: ${currentCountry}`);
+            
+            prompt.textContent = `Find: ${currentCountry}`;
+            guessesLeft = 3;
+            guessesElement.textContent = guessesLeft;
+            
+            feedback.textContent = '';
+            feedback.className = 'feedback';
+        }
+        
+        function endRound() {
+            addDebugInfo('Ending round...');
+            gameActive = false;
+            
+            const unguessedCountries = availableCountries.filter(countryId => !guessedCountries.has(countryId));
+            if (unguessedCountries.length === 0) {
+                nextBtn.textContent = 'Play Again';
+            } else {
+                nextBtn.textContent = 'Next Country';
+            }
+        }
+        
+        function resetAllCountryColors() {
+            const countryPaths = document.querySelectorAll('.country');
+            countryPaths.forEach(path => {
+                path.classList.remove('correct', 'incorrect');
+                path.style.fill = '#F5F5DC';
+                path.style.stroke = '#8B7355';
+                path.style.strokeWidth = '1';
+            });
+            addDebugInfo('Reset all country colors');
+        }
+        
+        // Event listeners
+        startBtn.addEventListener('click', startGame);
+        nextBtn.addEventListener('click', () => {
+            if (gameActive) {
+                endRound();
+            } else {
+                if (nextBtn.textContent === 'Play Again') {
+                    startGame();
+                } else {
+                    gameActive = true;
+                    nextCountry();
+                }
+            }
+        });
+        
+        resetViewBtn.addEventListener('click', () => {
+            addDebugInfo('Reset view clicked');
+            if (gameActive) {
+                guessesLeft = 3;
+                guessesElement.textContent = guessesLeft;
+                
+                document.querySelectorAll('.country.incorrect').forEach(path => {
+                    path.classList.remove('incorrect');
+                    path.style.fill = '#F5F5DC';
+                    path.style.stroke = '#8B7355';
+                    path.style.strokeWidth = '1';
+                });
+                
+                nextCountry();
+            }
+        });
+        
+        // Initialize
+        loadSVG();
+    </script>
+</body>
+</html> 

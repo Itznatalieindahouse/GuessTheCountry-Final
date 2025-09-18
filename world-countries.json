@@ -1,0 +1,993 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "United States",
+        "continent": "North America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-125, 48], [-125, 25], [-66, 25], [-66, 48], [-125, 48]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Canada",
+        "continent": "North America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-125, 48], [-125, 60], [-66, 60], [-66, 48], [-125, 48]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mexico",
+        "continent": "North America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-105, 32], [-105, 15], [-86, 15], [-86, 32], [-105, 32]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Brazil",
+        "continent": "South America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-75, 5], [-75, -35], [-35, -35], [-35, 5], [-75, 5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Argentina",
+        "continent": "South America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-75, -35], [-75, -55], [-55, -55], [-55, -35], [-75, -35]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chile",
+        "continent": "South America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-75, -18], [-75, -55], [-65, -55], [-65, -18], [-75, -18]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Colombia",
+        "continent": "South America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-80, 13], [-80, -5], [-70, -5], [-70, 13], [-80, 13]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Peru",
+        "continent": "South America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-85, 5], [-85, -18], [-70, -18], [-70, 5], [-85, 5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Venezuela",
+        "continent": "South America"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-75, 12], [-75, 0], [-60, 0], [-60, 12], [-75, 12]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "United Kingdom",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-8, 50], [-8, 60], [2, 60], [2, 50], [-8, 50]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "France",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-5, 42], [-5, 51], [10, 51], [10, 42], [-5, 42]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Germany",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [6, 47], [6, 55], [15, 55], [15, 47], [6, 47]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Italy",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [6, 36], [6, 47], [18, 47], [18, 36], [6, 36]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Spain",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-10, 36], [-10, 44], [4, 44], [4, 36], [-10, 36]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Poland",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [14, 49], [14, 55], [24, 55], [24, 49], [14, 49]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ukraine",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [22, 44], [22, 52], [40, 52], [40, 44], [22, 44]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sweden",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [11, 55], [11, 69], [24, 69], [24, 55], [11, 55]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Norway",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [5, 58], [5, 71], [31, 71], [31, 58], [5, 58]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Finland",
+        "continent": "Europe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [20, 60], [20, 70], [32, 70], [32, 60], [20, 60]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Russia",
+        "continent": "Europe/Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [30, 50], [30, 80], [180, 80], [180, 50], [30, 50]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "China",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [73, 18], [73, 54], [135, 54], [135, 18], [73, 18]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Japan",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [129, 31], [129, 46], [146, 46], [146, 31], [129, 31]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "India",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [68, 8], [68, 37], [97, 37], [97, 8], [68, 8]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pakistan",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [60, 24], [60, 37], [75, 37], [75, 24], [60, 24]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bangladesh",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [88, 22], [88, 27], [92, 27], [92, 22], [88, 22]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Thailand",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [97, 6], [97, 20], [106, 20], [106, 6], [97, 6]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Vietnam",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [102, 8], [102, 23], [109, 23], [109, 8], [102, 8]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Indonesia",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [95, -11], [95, 6], [141, 6], [141, -11], [95, -11]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Malaysia",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [100, 1], [100, 7], [119, 7], [119, 1], [100, 1]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Philippines",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [117, 5], [117, 21], [126, 21], [126, 5], [117, 5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "South Korea",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [125, 33], [125, 38], [132, 38], [132, 33], [125, 33]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "North Korea",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [124, 38], [124, 43], [130, 43], [130, 38], [124, 38]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mongolia",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [87, 42], [87, 52], [120, 52], [120, 42], [87, 42]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kazakhstan",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [50, 40], [50, 55], [87, 55], [87, 40], [50, 40]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Uzbekistan",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [56, 37], [56, 45], [75, 45], [75, 37], [56, 37]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Iran",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [44, 25], [44, 40], [63, 40], [63, 25], [44, 25]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Iraq",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [39, 29], [39, 37], [48, 37], [48, 29], [39, 29]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Saudi Arabia",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [35, 16], [35, 32], [55, 32], [55, 16], [35, 16]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Turkey",
+        "continent": "Asia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [26, 36], [26, 42], [45, 42], [45, 36], [26, 36]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Egypt",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [25, 22], [25, 32], [35, 32], [35, 22], [25, 22]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Libya",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [10, 20], [10, 33], [25, 33], [25, 20], [10, 20]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Algeria",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-8, 19], [-8, 37], [12, 37], [12, 19], [-8, 19]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Morocco",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-13, 28], [-13, 36], [-1, 36], [-1, 28], [-13, 28]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tunisia",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [7, 30], [7, 37], [12, 37], [12, 30], [7, 30]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sudan",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [22, 4], [22, 22], [39, 22], [39, 4], [22, 4]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "South Sudan",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [24, 4], [24, 12], [36, 12], [36, 4], [24, 4]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ethiopia",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [33, 4], [33, 14], [48, 14], [48, 4], [33, 4]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Somalia",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [41, -2], [41, 12], [51, 12], [51, -2], [41, -2]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kenya",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [34, -5], [34, 5], [42, 5], [42, -5], [34, -5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tanzania",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [29, -12], [29, -1], [40, -1], [40, -12], [29, -12]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Uganda",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [29, -1], [29, 4], [35, 4], [35, -1], [29, -1]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Democratic Republic of the Congo",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [12, -14], [12, 6], [31, 6], [31, -14], [12, -14]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Congo",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [11, -5], [11, 2], [18, 2], [18, -5], [11, -5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Central African Republic",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [14, 2], [14, 11], [27, 11], [27, 2], [14, 2]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cameroon",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [8, 2], [8, 13], [16, 13], [16, 2], [8, 2]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nigeria",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [3, 4], [3, 14], [15, 14], [15, 4], [3, 4]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Niger",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [0, 11], [0, 23], [16, 23], [16, 11], [0, 11]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chad",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [14, 8], [14, 23], [24, 23], [24, 8], [14, 8]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mali",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-12, 10], [-12, 25], [4, 25], [4, 10], [-12, 10]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Burkina Faso",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-6, 9], [-6, 15], [2, 15], [2, 9], [-6, 9]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ghana",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-4, 5], [-4, 11], [1, 11], [1, 5], [-4, 5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ivory Coast",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-8, 5], [-8, 10], [-3, 10], [-3, 5], [-8, 5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Guinea",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-15, 7], [-15, 12], [-8, 12], [-8, 7], [-15, 7]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Senegal",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-18, 12], [-18, 17], [-11, 17], [-11, 12], [-18, 12]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mauritania",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-17, 15], [-17, 27], [-5, 27], [-5, 15], [-17, 15]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Angola",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [11, -18], [11, -6], [24, -6], [24, -18], [11, -18]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zambia",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [22, -18], [22, -8], [33, -8], [33, -18], [22, -18]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Zimbabwe",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [25, -22], [25, -16], [33, -16], [33, -22], [25, -22]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mozambique",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [30, -26], [30, -10], [41, -10], [41, -26], [30, -26]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "South Africa",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [16, -35], [16, -22], [33, -22], [33, -35], [16, -35]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Namibia",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [11, -29], [11, -17], [25, -17], [25, -29], [11, -29]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Botswana",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [19, -27], [19, -18], [29, -18], [29, -27], [19, -27]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Madagascar",
+        "continent": "Africa"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [43, -26], [43, -12], [51, -12], [51, -26], [43, -26]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Australia",
+        "continent": "Oceania"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [113, -44], [113, -10], [154, -10], [154, -44], [113, -44]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "New Zealand",
+        "continent": "Oceania"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [166, -47], [166, -34], [179, -34], [179, -47], [166, -47]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Papua New Guinea",
+        "continent": "Oceania"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [141, -12], [141, -2], [156, -2], [156, -12], [141, -12]
+        ]]
+      }
+    }
+  ]
+} 

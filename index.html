@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geography Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    />
+</head>
+<body>
+    <!-- Home View -->
+    <div id="homeView" class="home-container">
+        <div class="home-top-map"></div>
+        <div class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">GeoGame</h1>
+                <p class="hero-subtitle">Learn the world, one country at a time</p>
+                <div class="hero-actions">
+                    <button id="btnPlay" class="btn-large">Play Game</button>
+                    <button id="btnStats" class="btn-large btn-outline">Statistics</button>
+                </div>
+            </div>
+        </div>
+        <div class="home-bottom-map"></div>
+    </div>
+
+    <!-- Play Menu View -->
+    <div id="playMenuView" class="modal-view" style="display: none;">
+        <div class="modal-card">
+            <h2>Choose Play Mode</h2>
+            <div class="mode-buttons">
+                <button id="btnContinents" class="btn-mode">Continents</button>
+                <button id="btnWorldMap" class="btn-mode">World Map</button>
+            </div>
+            <button id="playMenuBack" class="btn-link">Back</button>
+        </div>
+    </div>
+
+    <!-- Continents Selection View -->
+    <div id="continentsView" class="modal-view" style="display: none;">
+        <div class="modal-card">
+            <h2>Select a Continent</h2>
+            <div class="mode-buttons" style="flex-wrap: wrap;">
+                <button class="btn-mode continent-option" data-continent="Africa">Africa</button>
+                <button class="btn-mode continent-option" data-continent="Asia">Asia</button>
+                <button class="btn-mode continent-option" data-continent="Europe">Europe</button>
+                <button class="btn-mode continent-option" data-continent="North America">North America</button>
+                <button class="btn-mode continent-option" data-continent="South America">South America</button>
+                <button class="btn-mode continent-option" data-continent="Oceania">Oceania</button>
+            </div>
+            <button id="continentsBack" class="btn-link">Back</button>
+        </div>
+    </div>
+
+    <!-- Mode Selection View -->
+    <div id="modeView" class="modal-view" style="display: none;">
+        <div class="modal-card">
+            <h2>Select Difficulty</h2>
+            <div class="mode-buttons">
+                <button id="modeEasy" class="btn-mode">Easy</button>
+                <button id="modeMedium" class="btn-mode">Medium</button>
+                <button id="modeHard" class="btn-mode">Hard</button>
+            </div>
+            <button id="modeBack" class="btn-link">Back</button>
+        </div>
+    </div>
+
+    <!-- Statistics Menu View -->
+    <div id="statsMenuView" class="modal-view" style="display: none;">
+        <div class="modal-card">
+            <h2>Statistics</h2>
+            <div class="mode-buttons">
+                <button id="btnGlobalStats" class="btn-mode">Statistics</button>
+                <button id="btnYourStats" class="btn-mode">Your Statistics</button>
+            </div>
+            <button id="statsMenuBack" class="btn-link">Back</button>
+        </div>
+    </div>
+
+    <!-- Game View (Medium mode uses existing game) -->
+    <div id="gameView" class="game-container" style="display: none;">
+        <div class="header">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                <button id="gameBack" class="btn-outline">Back</button>
+                <h1>Geography Game</h1>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <span id="scopeLabel" style="background:#eafaf1;color:#065f46;padding:6px 10px;border-radius:9999px;border:1px solid #a7f3d0;">World Map</span>
+                    <button id="pauseBtn" class="btn-outline">Pause</button>
+                    <button id="playBtn" class="btn-outline" style="display:none;">Play</button>
+                    <button id="changeScope" class="btn-outline">Change</button>
+                    <button id="realMapBtn" title="Real map basemap (streets)" class="btn-outline">Real Map</button>
+                    <button id="realSatBtn" title="Real satellite imagery" class="btn-outline">Real Sat</button>
+                </div>
+            </div>
+            <div class="game-info">
+                <div class="score">Countries: <span id="countriesGuessed">0</span> / <span id="totalCountries">0</span></div>
+                <div class="guesses">Guesses Left: <span id="guesses">3</span></div>
+                <div class="timer">Time: <span id="timer">00:00</span></div>
+            </div>
+        </div>
+        
+        <div class="prompt-container">
+            <div id="prompt">Click "Start Game" to begin!</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+                <button id="zoomIn">+</button>
+                <button id="zoomOut">-</button>
+                <button id="resetView">Reset</button>
+            </div>
+            <button id="startBtn">Start Game</button>
+            <button id="nextBtn" style="display: none;">Next Country</button>
+            <button id="hintBtn" style="display: none;">Get Hint</button>
+            <div class="feedback" id="feedback"></div>
+        </div>
+
+        <div class="map-container">
+            <div id="mapWrapper" class="map-wrapper">
+                <div id="leafletMap" class="leaflet-map" style="display: block;"></div>
+                <svg
+                   xmlns:mapsvg="http://mapsvg.com"
+                   xmlns:dc="http://purl.org/dc/elements/1.1/"
+                   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                   xmlns:svg="http://www.w3.org/2000/svg"
+                   xmlns="http://www.w3.org/2000/svg"
+                   mapsvg:geoViewBox="-169.110266 83.600842 190.486279 -58.508473"
+                   viewBox="0 0 1009.6727 665.96301"
+                   width="1009.6727"
+                   height="665.96301"
+                   id="worldMap"
+                   style="display: none;">
+                    <!-- SVG content will be loaded here -->
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics View -->
+    <div id="statsView" class="stats-container" style="display: none;">
+        <div class="header stats-header">
+            <h1>Global Statistics</h1>
+            <div>
+                <button id="statsBackMenu" class="btn-outline">Back</button>
+                <button id="statsBackHome" class="btn-outline">Home</button>
+            </div>
+        </div>
+        <div class="stats-layout">
+            <div class="map-container">
+                <div id="statsMap" class="leaflet-map"></div>
+                <div id="statsTooltip" class="stats-tooltip" style="display: none;"></div>
+            </div>
+            <aside id="statsPanel" class="stats-panel">
+                <div class="panel-inner">
+                    <h3>Country Details</h3>
+                    <div id="statsPanelContent" class="panel-content">
+                        <p>Click a country to see more details.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Success Popup Modal -->
+    <div id="successModal" class="modal-view" style="display: none;">
+        <div class="modal-card success-modal">
+            <h2>🎉 Correct! 🎉</h2>
+            <div id="successContent">
+                <div class="success-stats">
+                    <p><strong>Attempts:</strong> <span id="successAttempts">-</span></p>
+                    <p><strong>Capital:</strong> <span id="successCapital">-</span></p>
+                </div>
+                <div class="success-flag">
+                    <img id="successFlag" src="" alt="Country flag" style="width: 100px; height: 60px; object-fit: cover; border: 2px solid #ddd; border-radius: 8px;">
+                </div>
+                <div class="success-fact">
+                    <p><strong>Cool Fact:</strong></p>
+                    <p id="successFact">-</p>
+                </div>
+            </div>
+            <button id="closeSuccessModal" class="btn-large">Continue</button>
+        </div>
+    </div>
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+    <script src="script.js"></script>
+    <script src="geogame-stats.js"></script>
+</body>
+</html> 
